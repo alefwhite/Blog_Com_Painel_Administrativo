@@ -3,6 +3,8 @@ const app = express();
 const port = 3333;
 const bodyParser = require('body-parser');
 const connection = require('./database/database');
+const CategoriesController = require('./categories/CategoriesController');
+const ArticlesController = require('./articles/ArticlesController');
 
 // view engie
 app.set('view engine', 'ejs');
@@ -24,7 +26,12 @@ connection
         console.error(error);
     });
 
+
 // Routes
+app.use("/", CategoriesController);
+app.use("/", ArticlesController);
+
+
 app.get("/", (req, res) => {
     //res.send("Bem vindo ao blog");
     res.render('index');
